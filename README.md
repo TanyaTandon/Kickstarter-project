@@ -1,12 +1,16 @@
-Project Charter
-Vision:
+# Project Charter
 
-Mission:
-Success criteria: Users play 80% of recommended songs more than once.
+**Vision**: 
 
-Note: Project charters should actually be more detailed than this! But this is where the charter belongs
+**Mission**: 
+**Success criteria**: Users play 80% of recommended songs more than once.
 
-Repo Structure
+_Note_: Project charters should actually be more detailed than this! But this is where the charter belongs
+
+
+# Repo Structure
+
+```
 ├── README.md                         <- You are here
 │
 ├── app
@@ -54,3 +58,4 @@ Repo Structure
 ├── app.py                            <- Flask wrapper for running the model 
 ├── config.py                         <- Configuration file for Flask app
 ├── requirements.txt                  <- Python package dependencies 
+```
