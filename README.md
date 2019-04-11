@@ -1,6 +1,12 @@
+Project Charter
+Vision:
 
-#Repo Structure
+Mission:
+Success criteria: Users play 80% of recommended songs more than once.
 
+Note: Project charters should actually be more detailed than this! But this is where the charter belongs
+
+Repo Structure
 ├── README.md                         <- You are here
 │
 ├── app
