@@ -1,6 +1,6 @@
 # Project Charter
 
-**Vision**:  In the history of the world, today is the best time for a dream to come true. With distances in the world shrinking by internet, Kickstarter is one of the fastest and easiest ways to kickstart a great idea. The project aligns with Kickstarters mission to "help bring creative projects to life".
+**Vision**: In the history of the world, today is the best time for a dream to come true. With distances in the world shrinking by the internet, Kickstarter is one of the fastest and easiest ways to kickstart a great idea. Theis project aligns with Kickstarters mission to "help bring creative projects to life" by predicting if a kickstarter campaign will be successfull or not.
 
 **Mission**:  This goal of the project is to predict success of a Kickstarter project. It will further suggest alternate completion dates as well as alternate goals that will be more likely to succeed to help anyone and everyone who has an idea to raise money. 
 
