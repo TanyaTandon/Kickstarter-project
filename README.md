@@ -1,11 +1,110 @@
 # Project Charter
 
-**Vision**: 
+**Vision**:  In the history of the world, today is the best time for a dream to come true. With distances in the world shrinking by internet, Kickstarter is one of the fastest and easiest ways to kickstart a great idea. The project aligns with Kickstarters mission to "help bring creative projects to life".
 
-**Mission**: 
-**Success criteria**: Users play 80% of recommended songs more than once.
+**Mission**:  This goal of the project is to predict success of a Kickstarter project. It will further suggest alternate completion dates as well as alternate goals that will be more likely to succeed to help anyone and everyone who has an idea to raise money. 
 
-_Note_: Project charters should actually be more detailed than this! But this is where the charter belongs
+**Success criteria**:  
+- Accuracy of atleast 60% ( Using AUC or Missclassification rate) 
+- Inbound traffic of atleast 100 Kickstarter campaign starters
+- Above 70 % positive feedback on UX design
+
+# Planned work 
+
+### Theme 1: Model Development
+
+***Epic 1:*** Design data set that best represents  all aspects needed to classify a Kickstarter project
+
+-  **Story 1:** Sort the relevant as well as connectable dataset from Kaggle
+- **Story 2:** Connect all these data sets
+- **Story 3:** Design new features
+
+***Epic 2:*** EDA and Data cleaning and preparation for modeling
+
+***Epic 3:*** Initial Model Development
+
+- **Story 1:** Build logistic regression model
+- **Story 2:** Build boosted trees
+- **Story 3:** Build Random Forest
+- **Story 4:** Compare measures of success (AOC, missclass rate, recall, etc) (%) for each on new data 
+- **Story 5:** Reiterate the model for improvement
+
+***Epic 4:*** Create unit test scripts to test model functionality 
+
+### Theme2 : App Development 
+***Epic 1:*** Setting up the requirements.txt from the current enviornment state to make reproducible environment
+
+***Epic 2:*** Deploy the flask app 
+
+***Epic 3:*** Setup Amazon cloud server for file hosting
+
+
+***Epic 4:*** Setup front end interface UI where the users will interact with the model built
+- **Story1:**  Setup a basic front end interface with all the required options
+- **Story 2:**  Improve the baisc front end interface to include engaging gifs on the Home page
+
+***Epic 4:*** Create UAT test scripts to test that UI is working as expected to intake selections and output accordingly
+- **Story1:**  Check for model functionality 
+- **Story 2:** Check for exception handling by UI 
+
+***Epic 5:***  Create logging for easy debugging and error notifications
+
+
+
+
+
+
+
+# Backlog 
+**Sprint Sizing Legend:**
+
+-   0 points - quick chore
+-   1 point ~ 1 hour (small)
+-   2 point ~ 2.5 hour ( slightly bigger than small) 
+-   3 points ~ 1/2 day (medium)
+-   4 points ~ 1 day (large)
+-   8 points - big and needs to be broken down more when it comes to execution (okay as placeholder for future work though)
+    
+1.  **Theme1.epic1.story1**  (2pts) - PLANNED: sprint 1
+    
+2.  **Theme1.epic1.story2**  (2pts) - PLANNED: sprint 1
+    
+3.  **Theme1.epic1.story3**  (2pts) - PLANNED: sprint 1
+    
+4.  **Theme1.epic2**  (3pts) - PLANNED: sprint 1
+    
+5.  **Theme1.epic3.story1**  (2pts)
+    
+6.  **Theme1.epic3.story2**  (2pts)
+    
+7.  **Theme1.epic3.story3**  (2pts)
+    
+8.  **Theme1.epic3.story4**  (1pts)
+    
+9.  **Theme1.epic3.story5**  (2pts)
+    
+10.  **Theme1.epic4**  (3pts)
+    
+11.  **Theme2.epic1**  (3pts)
+    
+12.  **Theme2.epic2**  (3pts)
+    
+13.  **Theme2.epic3.story1**  (4pts)
+    
+14.  **Theme2.epic3.story2**  (4pts)
+    
+15.  **Theme2.epic4.story1**  (2pts)
+    
+16.  **Theme2.epic4.story2**  (2pts)
+    
+17.  **Theme2.epic5**  (3pts)
+
+# Icebox 
+
+***Epic 1 :*** Develop a recommendation bar to suggest alterante goals and alternate completion dates for success of the projects 
+- **Story 1:** Integrate the model with this functionality 
+- **Story 2:** Integrate the UI with this functionality 
+
 
 
 # Repo Structure
@@ -59,3 +158,4 @@ _Note_: Project charters should actually be more detailed than this! But this is
 ├── config.py                         <- Configuration file for Flask app
 ├── requirements.txt                  <- Python package dependencies 
 ```
+
