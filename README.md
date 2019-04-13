@@ -37,9 +37,9 @@
 ***Epic 1:*** Setup Deployment pipeline
 - **Story 1:** Setting up the requirements.txt from the current environment state to make reproducible environment
 - **Story 2:**  Set up S3 instance
-- **Story 2:**  Initialize RDS database
-- **Story 2:**  Deploy the flask app
-- **Story 3:** Setup Amazon cloud server for file hosting
+- **Story 3:**  Initialize RDS database
+- **Story 4:**  Deploy the flask app
+- **Story 5:** Setup Amazon cloud server for file hosting
 
 ***Epic 2:*** Setup front end interface UI where the users will interact with the model built
 - **Story1:**  Setup a basic front end interface with all the required options
