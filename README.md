@@ -1,12 +1,12 @@
 # Dear Genie - Kickstarter
 
-**Vision**: In the history of the world, today is the best time for a dream to come true. With distances in the world shrinking by the internet, Kickstarter is one of the fastest and easiest ways to kickstart a great idea. Theis project aligns with Kickstarters mission to "help bring creative projects to life" by predicting if a kickstarter campaign will be successfull or not.
+**Vision**: In the history of the world, today is the best time for a dream to come true. With distances in the world shrinking by the internet, Kickstarter is one of the fastest and easiest ways to kickstart a great idea. This project aligns with Kickstarters mission to "help bring creative projects to life" by predicting if a kickstarter campaign will be successful or not. It will help any and everyone launching a campaign on Kickstarter. Users with failed campaigns can leverage the platform by exploring alternate goals as well as alternate completion dates to understand the tweaks needed for a more likely success. 
 
-**Mission**:  Since the goal of the project is to predict success of a Kickstarter project, it will help users evaluate whether their campaign will be able to raise money or not even before they do it. It will further suggest alternate completion dates as well as alternate goals that will be more likely to succeed to help users modify their campaign for a sure shot success. 
+**Mission**:  Developing a classifier algorithm that predicts whether a Kickstarter project will be successful or not. This will help users evaluate whether their campaign will be able to raise money or not even before they do it. It will further suggest alternate completion dates as well as alternate goals to users that will be more likely to succeed. This will help users modify their campaign for a sure shot success.
 
 **Success criteria**:  
-- Accuracy of atleast 60% ( Using AUC or Missclassification rate) 
-- Inbound traffic of atleast 100 Kickstarter campaign starters
+- Accuracy of at least 60% ( Using AUC or Misclassification rate) 
+- Inbound traffic of at least 100 Kickstarter campaign starters
 - Above 70 % positive feedback on UI design
 
 # Planned work 
@@ -14,12 +14,14 @@
 ### Theme 1: Model Development
 
 ***Epic 1:*** Design data set that best represents  all aspects needed to classify a Kickstarter project
-
--  **Story 1:** Sort the relevant as well as connectable dataset from Kaggle
+-  **Story 1:** Downloading the relevant dataset from Kaggle keeping in mind that it would be possible to join them later 
 - **Story 2:** Connect all these data sets
 - **Story 3:** Design new features
 
-***Epic 2:*** EDA and Data cleaning and preparation for modeling
+***Epic 2:*** Data preparation 
+  **Story 1:** Exploratory Data Analysis
+
+- **Story 2:** Data Cleaning 
 
 ***Epic 3:*** Model Development
 
@@ -32,22 +34,22 @@
 ***Epic 4:*** Create unit test scripts to test model functionality 
 
 ### Theme2 : App Development 
-***Epic 1:*** Setting up the requirements.txt from the current enviornment state to make reproducible environment
+***Epic 1:*** Setup Deployment pipeline
+- **Story 1:** Setting up the requirements.txt from the current environment state to make reproducible environment
+- **Story 2:**  Set up S3 instance
+- **Story 2:**  Initialize RDS database
+- **Story 2:**  Deploy the flask app
+- **Story 3:** Setup Amazon cloud server for file hosting
 
-***Epic 2:*** Deploy the flask app 
-
-***Epic 3:*** Setup Amazon cloud server for file hosting
-
-
-***Epic 4:*** Setup front end interface UI where the users will interact with the model built
+***Epic 2:*** Setup front end interface UI where the users will interact with the model built
 - **Story1:**  Setup a basic front end interface with all the required options
-- **Story 2:**  Improve the baisc front end interface to include engaging gifs on the Home page
+- **Story 2:**  Improve the basic front end interface to include engaging gifs on the Home page
 
-***Epic 4:*** Create UAT test scripts to test that UI is working as expected to intake selections and output accordingly
+***Epic 3:*** Create UAT test scripts to test that UI is working as expected to intake selections and output accordingly
 - **Story1:**  Check for model functionality 
 - **Story 2:** Check for exception handling by UI 
 
-***Epic 5:***  Create logging for easy debugging and error notifications
+***Epic 4:***  Create logging for easy debugging and error notifications
 
 
 
@@ -73,7 +75,7 @@
     
 4.  **Theme1.epic2**  (3pts) - PLANNED: sprint 1
     
-5.  **Theme1.epic3.story1**  (2pts)
+5.  **Theme1.epic3.story1**  (2pts) - PLANNED: sprint 1
     
 6.  **Theme1.epic3.story2**  (2pts)
     
@@ -101,7 +103,7 @@
 
 # Icebox 
 
-***Epic 1 :*** Develop a recommendation bar to suggest alterante goals and alternate completion dates for success of the projects 
+***Epic 1 :*** Develop a recommendation bar to suggest alternate goals and alternate completion dates for success of the projects 
 - **Story 1:** Integrate the model with this functionality 
 - **Story 2:** Integrate the UI with this functionality 
 
