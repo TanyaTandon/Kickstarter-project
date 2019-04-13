@@ -21,7 +21,7 @@
 
 ***Epic 2:*** EDA and Data cleaning and preparation for modeling
 
-***Epic 3:*** Initial Model Development
+***Epic 3:*** Model Development
 
 - **Story 1:** Build logistic regression model
 - **Story 2:** Build boosted trees
