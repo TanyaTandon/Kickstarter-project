@@ -36,10 +36,9 @@
 ### Theme2 : App Development 
 ***Epic 1:*** Setup Deployment pipeline
 - **Story 1:** Setting up the requirements.txt from the current environment state to make reproducible environment
-- **Story 2:**  Set up S3 instance
+- **Story 2:**  Set up S3 instance 
 - **Story 3:**  Initialize RDS database
 - **Story 4:**  Deploy the flask app
-- **Story 5:** Setup Amazon cloud server for file hosting
 
 ***Epic 2:*** Setup front end interface UI where the users will interact with the model built
 - **Story1:**  Setup a basic front end interface with all the required options
@@ -77,13 +76,13 @@
     
 5.  **Theme1.epic3.story1**  (2pts) - PLANNED: sprint 1
     
-6.  **Theme1.epic3.story2**  (2pts)
+6.  **Theme1.epic3.story2**  (2pts) - PLANNED: sprint 1
     
-7.  **Theme1.epic3.story3**  (2pts)
+7.  **Theme1.epic3.story3**  (2pts) - PLANNED: sprint 1
     
-8.  **Theme1.epic3.story4**  (1pts)
+8.  **Theme1.epic3.story4**  (1pts) - PLANNED: sprint 1
     
-9.  **Theme1.epic3.story5**  (2pts)
+9.  **Theme1.epic3.story5**  (2pts) 
     
 10.  **Theme1.epic4**  (3pts)
     
