@@ -20,7 +20,6 @@
 
 ***Epic 2:*** Data preparation 
 - **Story 1:** Exploratory Data Analysis
-
 - **Story 2:** Data Cleaning 
 
 ***Epic 3:*** Model Development
@@ -72,33 +71,45 @@
     
 3.  **Theme1.epic1.story3**  (2pts) - PLANNED: sprint 1
     
-4.  **Theme1.epic2**  (3pts) - PLANNED: sprint 1
+4.  **Theme1.epic2.story1**  (2pts) - PLANNED: sprint 1
+
+5.  **Theme1.epic2.story2**  (2pts) - PLANNED: sprint 1
     
-5.  **Theme1.epic3.story1**  (2pts) - PLANNED: sprint 1
+6.  **Theme1.epic3.story1**  (2pts) - PLANNED: sprint 1
     
-6.  **Theme1.epic3.story2**  (2pts) - PLANNED: sprint 1
+7.  **Theme1.epic3.story2**  (2pts) - PLANNED: sprint 1
     
-7.  **Theme1.epic3.story3**  (2pts) - PLANNED: sprint 1
+8.  **Theme1.epic3.story3**  (2pts) - PLANNED: sprint 1
     
-8.  **Theme1.epic3.story4**  (1pts) - PLANNED: sprint 1
+9.  **Theme1.epic3.story4**  (1pts) - PLANNED: sprint 1
     
-9.  **Theme1.epic3.story5**  (2pts) 
+10.  **Theme1.epic3.story5**  (2pts) 
     
-10.  **Theme1.epic4**  (3pts)
+11.  **Theme1.epic4**  (3pts)
     
-11.  **Theme2.epic1**  (3pts)
+12.  **Theme2.epic1.story1**  (2pts)
     
-12.  **Theme2.epic2**  (3pts)
+13.  **Theme2.epic1.story2**  (1pts)
     
-13.  **Theme2.epic3.story1**  (4pts)
+14.  **Theme2.epic1.story3**  (1pts)
+
+15.  **Theme2.epic1.story4**  (1pts)
+
+16.  **Theme2.epic1.story5**  (1pts)
+
+17.  **Theme2.epic2.story1**  (3pts)
     
-14.  **Theme2.epic3.story2**  (4pts)
+18.  **Theme2.epic2.story2**  (4pts)
+
+19.  **Theme2.epic3.story1**  (1pts)
+
+20.  **Theme2.epic3.story2**  (1pts)
     
-15.  **Theme2.epic4.story1**  (2pts)
+21.  **Theme2.epic4.story1**  (2pts)
     
-16.  **Theme2.epic4.story2**  (2pts)
+22.  **Theme2.epic4**  (2pts)
     
-17.  **Theme2.epic5**  (3pts)
+
 
 # Icebox 
 
