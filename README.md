@@ -1,4 +1,4 @@
-# Dear Genie
+# Dear Genie - Kickstarter
 
 **Vision**: In the history of the world, today is the best time for a dream to come true. With distances in the world shrinking by the internet, Kickstarter is one of the fastest and easiest ways to kickstart a great idea. Theis project aligns with Kickstarters mission to "help bring creative projects to life" by predicting if a kickstarter campaign will be successfull or not.
 
