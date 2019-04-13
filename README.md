@@ -19,7 +19,7 @@
 - **Story 3:** Design new features
 
 ***Epic 2:*** Data preparation 
-  **Story 1:** Exploratory Data Analysis
+- **Story 1:** Exploratory Data Analysis
 
 - **Story 2:** Data Cleaning 
 
