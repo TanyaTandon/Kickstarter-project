@@ -7,7 +7,7 @@
 **Success criteria**:  
 - Accuracy of atleast 60% ( Using AUC or Missclassification rate) 
 - Inbound traffic of atleast 100 Kickstarter campaign starters
-- Above 70 % positive feedback on UX design
+- Above 70 % positive feedback on UI design
 
 # Planned work 
 
