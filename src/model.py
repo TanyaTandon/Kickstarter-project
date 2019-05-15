@@ -27,7 +27,7 @@ class Userinput(Base):
 
     __tablename__ = 'Userinput'
 
-    
+    id = Column(Integer, primary_key=True)
     camp_name = Column(String(300), unique=False, nullable=False)
     category = Column(String(100), unique=False, nullable=False)
     launch_day = Column(String(100), unique=False, nullable=False)
@@ -37,8 +37,8 @@ class Userinput(Base):
     
 
     def __repr__(self):
-        Userinput_repr = "<Userinput(camp_name='%i', category='%i', launch_day='%i', deadline_day= '%i', goal= '%i', country= '%i')>"
-        return Userinput_repr % (self.id, self.user_id, self.joke_id, self.rating)
+        Userinput_repr = "<Userinput(id= '%i', camp_name='%s', category='%s', launch_day='%s', deadline_day= '%s', goal= '%i', country= '%s')>"
+        return Userinput_repr % (self.id, self.camp_name, self.category, self.launch_day, self.deadline_day, self.goal, self.country)
 
 
 def create_sqlite_db(args):
