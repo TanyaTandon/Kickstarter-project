@@ -1,8 +1,19 @@
+"""
+Enables the command line execution of multiple modules within src/
+This module combines the argparsing of each module within src/ and enables the execution of the corresponding scripts
+so that all module imports can be absolute with respect to the main project directory.
+To understand different arguments, run `python run.py --help`
+"""
+
 
 import argparse
 import logging.config
 logging.config.fileConfig("config/logging/local.conf")
 logger = logging.getLogger("dear-genie")
+
+# The logging configurations are called from local.conf
+logging.config.fileConfig(os.path.join("config","logging_local.conf"))
+logger = logging.getLogger(config.LOGGER_NAME)
 
 from src.load_data import load_data
 from src.model import create_sqlite_db, create_rds_db
@@ -14,7 +25,8 @@ if __name__ == '__main__':
     subparsers = parser.add_subparsers()
 
     sub_process = subparsers.add_parser('loadS3')
-    sub_process.add_argument("--bucket", type=str, default=BUCKET_NAME, help="Bucket to be copied to")
+    sub_process.add_argument("--where", type=str, default="Local", help="'Local' or 'AWS'; The destination bucket name needs to be provided in case of AWS")
+    sb_fetch.add_argument("--bucket", default="None", help="Destination S3 bucket name")
     sub_process.set_defaults(func=load_data)
 
     sub_process = subparsers.add_parser('createSqlite')

@@ -14,7 +14,7 @@ from config import SQLALCHEMY_DATABASE_URI, DATABASE_NAME
 
 
 logger = logging.getLogger(__name__)
-logger.setLevel("INFO")
+#logger.setLevel("INFO")
 
 Base = declarative_base()
 
