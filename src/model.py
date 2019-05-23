@@ -72,21 +72,3 @@ def create_rds_db(args):
     engine = sqlalchemy.create_engine(engine_string)
     Base.metadata.create_all(engine)
 
-
-if __name__ == '__main__':
-
-    parser = argparse.ArgumentParser(description="Data processes")
-    subparsers = parser.add_subparsers()
-
-    sub_process = subparsers.add_parser('createSqlite')
-    sub_process.add_argument("--database", type=str, default=SQLALCHEMY_DATABASE_URI,
-                             help="Connection uri for SQLALCHEMY")
-    sub_process.set_defaults(func=create_sqlite_db)
-
-    sub_process = subparsers.add_parser('createRDS')
-    sub_process.add_argument("--database", type=str, default=DATABASE_NAME,
-                             help="Database in RDS")
-    sub_process.set_defaults(func=create_rds_db)
-
-    args = parser.parse_args()
-    args.func(args)
