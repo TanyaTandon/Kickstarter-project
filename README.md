@@ -55,10 +55,6 @@ QA Owner: Saurabh Annadate
 
 
 
-
-
-
-
 # Backlog 
 **Sprint Sizing Legend:**
 
@@ -197,6 +193,8 @@ pip install -r requirements.txt
 ```
 
 ### 2. Download the data
+
+Kaggle Link: https://www.kaggle.com/kemical/kickstarter-projects
 
 #### Local
 Run the following command in bash:
