@@ -10,7 +10,7 @@ from sqlalchemy import Column, Integer, String, MetaData
 
 sys.path.append(os.path.abspath(os.path.join('..')))
 
-from config import SQLALCHEMY_DATABASE_URI, DATABASE_NAME
+from config.config import SQLALCHEMY_DATABASE_URI, DATABASE_NAME
 
 
 logger = logging.getLogger(__name__)
@@ -21,7 +21,7 @@ Base = declarative_base()
 
 class Userinput(Base):
 
-     """Creates a database with the data models inherited from `Base` (Usage_Log).
+    """Creates a database with the data models inherited from `Base` (Usage_Log).
     Args:
         args: Argparse args - include args args.where and args.manual.
     Returns:
@@ -30,7 +30,7 @@ class Userinput(Base):
 
     __tablename__ = 'Userinput'
 
-    id = Column(Integer, , autoincrement=True, primary_key=True)
+    id = Column(Integer, autoincrement=True, primary_key=True)
     camp_name = Column(String(300), unique=False, nullable=False)
     category = Column(String(100), unique=False, nullable=False)
     launch_day = Column(String(100), unique=False, nullable=False)
@@ -40,7 +40,7 @@ class Userinput(Base):
     
 
     def __repr__(self):
-        Userinput_repr = "<Userinput(id= '%i', camp_name='%s', category='%s', launch_day='%s', deadline_day= '%s', goal= '%i', country= '%s')>"
+        Userinput_repr = "<Userinput(id ='%i', camp_name='%s', category='%s', launch_day='%s', deadline_day= '%s', goal= '%i', country= '%s')>"
         return Userinput_repr % (self.id, self.camp_name, self.category, self.launch_day, self.deadline_day, self.goal, self.country)
 
 
@@ -72,6 +72,4 @@ def create_rds_db(args):
     engine_string = "{}://{}:{}@{}:{}/{}". \
         format(conn_type, user, password, host, port, DATABASE_NAME)
 
-    engine = sqlalchemy.create_engine(engine_string)
-    Base.metadata.create_all(engine)
 

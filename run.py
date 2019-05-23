@@ -6,18 +6,19 @@ To understand different arguments, run `python run.py --help`
 """
 
 
+import os
 import argparse
+import config.config as config
+import logging
 import logging.config
-logging.config.fileConfig("config/logging/local.conf")
-logger = logging.getLogger("dear-genie")
 
 # The logging configurations are called from local.conf
 logging.config.fileConfig(os.path.join("config","logging_local.conf"))
 logger = logging.getLogger(config.LOGGER_NAME)
 
-from src.load_data import load_data
+from src.load_data import run_loading
 from src.model import create_sqlite_db, create_rds_db
-from config import BUCKET_NAME, SQLALCHEMY_DATABASE_URI, DATABASE_NAME
+from config.config import SQLALCHEMY_DATABASE_URI, DATABASE_NAME
 
 if __name__ == '__main__':
 
@@ -26,8 +27,8 @@ if __name__ == '__main__':
 
     sub_process = subparsers.add_parser('loadS3')
     sub_process.add_argument("--where", type=str, default="Local", help="'Local' or 'AWS'; The destination bucket name needs to be provided in case of AWS")
-    sb_fetch.add_argument("--bucket", default="None", help="Destination S3 bucket name")
-    sub_process.set_defaults(func=load_data)
+    sub_process.add_argument("--bucket", default="None", help="Destination S3 bucket name")
+    sub_process.set_defaults(func= run_loading)
 
     sub_process = subparsers.add_parser('createSqlite')
     sub_process.add_argument("--engine_string", type=str, default=SQLALCHEMY_DATABASE_URI,
