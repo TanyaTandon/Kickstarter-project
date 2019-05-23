@@ -1,3 +1,7 @@
+Mid point review
+
+Project Owner: Tanya Tandon 
+QA Owner: Saurabh Annadate
 # Dear Genie - Kickstarter
 
 **Vision**: In the history of the world, today is the best time for a dream to come true. With distances in the world shrinking by the internet, Kickstarter is one of the fastest and easiest ways to kickstart a great idea. This project aligns with Kickstarters mission to "help bring creative projects to life" by predicting if a kickstarter campaign will be successful or not. It will help any and everyone launching a campaign on Kickstarter. Users with failed campaigns can leverage the platform by exploring alternate goals as well as alternate completion dates to understand the tweaks needed for a more likely success. 
@@ -51,10 +55,6 @@
 
 
 
-
-
-
-
 # Backlog 
 **Sprint Sizing Legend:**
 
@@ -65,34 +65,34 @@
 -   4 points ~ 1 day (large)
 -   8 points - big and needs to be broken down more when it comes to execution (okay as placeholder for future work though)
     
-1.  **Theme1.epic1.story1**  (2pts) - PLANNED: sprint 1
+1.  **Theme1.epic1.story1**  (2pts) - (completed)
     
-2.  **Theme1.epic1.story2**  (2pts) - PLANNED: sprint 1
+2.  **Theme1.epic1.story2**  (2pts) - (completed)
     
-3.  **Theme1.epic1.story3**  (2pts) - PLANNED: sprint 1
+3.  **Theme1.epic1.story3**  (2pts) - (completed)
     
-4.  **Theme1.epic2.story1**  (2pts) - PLANNED: sprint 1
+4.  **Theme1.epic2.story1**  (2pts) - (completed)
 
-5.  **Theme1.epic2.story2**  (2pts) - PLANNED: sprint 1
+5.  **Theme1.epic2.story2**  (2pts) - (completed)
     
-6.  **Theme1.epic3.story1**  (2pts) - PLANNED: sprint 1
+6.  **Theme1.epic3.story1**  (2pts) - 
     
-7.  **Theme1.epic3.story2**  (2pts) - PLANNED: sprint 1
+7.  **Theme1.epic3.story2**  (2pts) - 
     
-8.  **Theme1.epic3.story3**  (2pts) - PLANNED: sprint 1
+8.  **Theme1.epic3.story3**  (2pts) - 
     
-9.  **Theme1.epic3.story4**  (1pts) - PLANNED: sprint 1
+9.  **Theme1.epic3.story4**  (1pts) - 
     
 10.  **Theme1.epic3.story5**  (2pts) 
     
 11.  **Theme1.epic4**  (3pts)
     
-12.  **Theme2.epic1.story1**  (2pts)
+12.  **Theme2.epic1.story1**  (2pts) (completed)
     
-13.  **Theme2.epic1.story2**  (1pts)
+13.  **Theme2.epic1.story2**  (1pts) (completed)
     
-14.  **Theme2.epic1.story3**  (1pts)
-
+14.  **Theme2.epic1.story3**  (1pts) (completed)
+ 
 15.  **Theme2.epic1.story4**  (1pts)
 
 16.  **Theme2.epic1.story5**  (1pts)
@@ -170,4 +170,72 @@
 ├── config.py                         <- Configuration file for Flask app
 ├── requirements.txt                  <- Python package dependencies 
 ```
+
+## Instructions to run the application
+
+Ths application can be run on both local system as well as on AWS. Steps on how to deploy the app for both settings is given below.
+
+### 1. Set up environment 
+
+The `requirements.txt` file contains the packages required to run the model code. An environment can be set up in two ways. 
+
+#### With `virtualenv`
+
+```bash
+pip install virtualenv
+
+virtualenv deargenie
+
+source deargenie/bin/activate
+
+pip install -r requirements.txt
+
+```
+
+### 2. Download the data
+
+Kaggle Link: https://www.kaggle.com/kemical/kickstarter-projects
+
+#### Local
+Run the following command in bash:
+```bash
+python run.py loadS3
+```
+Running this code will download the raw data from the s3 bucket and will put it in **/Data/raw/**
+
+
+#### AWS
+Run the following command in bash:
+```bash
+python run.py loadS3 --where=AWS --bucket=<destination_bucket_name>
+```
+Running this code will download the raw data from the s3 bucket and will put it in **<destination_bucket_name>/raw/**
+
+### 3. Initialize the database
+
+#### Local
+Run the following command in bash:
+```bash
+python run.py createSqlite
+```
+Running this code will create a sqlite database to log the app usage at: **/Data/usage_log/msia423.db**
+
+
+#### AWS
+
+There are two ways that a database can be initialized in AWS.
+
+##### - Take configurations from the environment:
+
+This requires the following environment variables to be set in advance of running the code:
+* MYSQL_USER : *Username to access the RDS instance*
+* MYSQL_PASSWORD : *Password to access the RDS instance*
+* MYSQL_HOST : *RDS instance endpoinr*
+* MYSQL_PORT : *Port number to access the instance*
+*
+After the environment variables have been set, run the following command in bash:
+```bash
+python run.py createRDS --database=<database name> 
+```
+Running this code will create the database specified in the given RDS instance. By default, database name = msia423 
 
