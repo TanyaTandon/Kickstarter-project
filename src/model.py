@@ -21,13 +21,16 @@ Base = declarative_base()
 
 class Userinput(Base):
 
-    """Create a data model for the database to be set up for capturing user input
-
+     """Creates a database with the data models inherited from `Base` (Usage_Log).
+    Args:
+        args: Argparse args - include args args.where and args.manual.
+    Returns:
+        None
     """
 
     __tablename__ = 'Userinput'
 
-    id = Column(Integer, primary_key=True)
+    id = Column(Integer, , autoincrement=True, primary_key=True)
     camp_name = Column(String(300), unique=False, nullable=False)
     category = Column(String(100), unique=False, nullable=False)
     launch_day = Column(String(100), unique=False, nullable=False)
@@ -42,7 +45,7 @@ class Userinput(Base):
 
 
 def create_sqlite_db(args):
-    """Creates an sqlite database with the data models inherited from `Base` .
+    """Creates an sqlite database with the data models inherited from `Base` and creates its locally.
     Args:
         args (argument from user): String defining SQLAlchemy connection URI in the form of
     Returns:
@@ -54,7 +57,7 @@ def create_sqlite_db(args):
 
 
 def create_rds_db(args):
-    """Creates an rds table? with the data models inherited from `Base` (UserLines).
+    """Creates an rds table with the data models inherited from `Base` (UserLines).
         Args:
             args (argument from user): String defining RDS in the desrired form
         Returns:
