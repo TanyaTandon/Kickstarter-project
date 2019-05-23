@@ -172,3 +172,69 @@ Mid point review
 ├── requirements.txt                  <- Python package dependencies 
 ```
 
+## Instructions to run the application
+
+Ths application can be run on both local system as well as on AWS. Steps on how to deploy the app for both settings is given below.
+
+### 1. Set up environment 
+
+The `requirements.txt` file contains the packages required to run the model code. An environment can be set up in two ways. 
+
+#### With `virtualenv`
+
+```bash
+pip install virtualenv
+
+virtualenv deargenie
+
+source deargenie/bin/activate
+
+pip install -r requirements.txt
+
+```
+
+### 2. Download the data
+
+#### Local
+Run the following command in bash:
+```bash
+python run.py loadS3
+```
+Running this code will download the raw data from the s3 bucket and will put it in **/Data/raw/**
+
+
+#### AWS
+Run the following command in bash:
+```bash
+python run.py loadS3 --where=AWS --bucket=<destination_bucket_name>
+```
+Running this code will download the raw data from the s3 bucket and will put it in **<destination_bucket_name>/raw/**
+
+### 3. Initialize the database
+
+#### Local
+Run the following command in bash:
+```bash
+python run.py createSqlite
+```
+Running this code will create a sqlite database to log the app usage at: **/Data/usage_log/msia423.db**
+
+
+#### AWS
+
+There are two ways that a database can be initialized in AWS.
+
+##### - Take configurations from the environment:
+
+This requires the following environment variables to be set in advance of running the code:
+* MYSQL_USER : *Username to access the RDS instance*
+* MYSQL_PASSWORD : *Password to access the RDS instance*
+* MYSQL_HOST : *RDS instance endpoinr*
+* MYSQL_PORT : *Port number to access the instance*
+*
+After the environment variables have been set, run the following command in bash:
+```bash
+python run.py createRDS --database=<database name> 
+```
+Running this code will create the database specified in the given RDS instance. By default, database name = msia423 
+
