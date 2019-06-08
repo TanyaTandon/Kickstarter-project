@@ -20,6 +20,11 @@ from src.load_data import run_loading
 from src.model import create_sqlite_db, create_rds_db
 from config.config import SQLALCHEMY_DATABASE_URI, DATABASE_NAME
 
+from src.ingest_data import load_data_first
+from src.clean import clean_table
+from src.model_final import fitting
+from src.evaluation import eval 
+
 if __name__ == '__main__':
 
     parser = argparse.ArgumentParser(description="Data processes")
@@ -40,8 +45,24 @@ if __name__ == '__main__':
                              help="Database in RDS")
     sub_process.set_defaults(func=create_rds_db)
 
+    parser = argparse.ArgumentParser(description="Run components of the model source code")
+    subparsers = parser.add_subparsers()
+
+    sub_process = subparsers.add_parser('ingest_data') 
+    sub_process.set_defaults(func=load_data_first)
+
+    sub_process = subparsers.add_parser('Returns_cleaned_data')
+    sub_process.set_defaults(func=clean_table)
+
+    sub_process = subparsers.add_parser('Model_fitting')
+    sub_process.set_defaults(func=fitting)
+
+    sub_process = subparsers.add_parser('eval')
+    sub_process.set_defaults(func=eval)
+    
     args = parser.parse_args()
-    args.func(args)
+    args.func()
+
 
 
 
