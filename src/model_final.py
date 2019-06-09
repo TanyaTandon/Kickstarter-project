@@ -3,7 +3,7 @@ from sklearn.ensemble import GradientBoostingClassifier
 import pandas as pd
 import yaml
 from sklearn import metrics
-from sklearn.externals import joblib
+
 
 def ingestdata(): 
 	with open('config.yml', 'r') as f:

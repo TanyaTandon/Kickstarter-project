@@ -21,7 +21,7 @@ from src.model import create_sqlite_db, create_rds_db
 from config.config import SQLALCHEMY_DATABASE_URI, DATABASE_NAME
 
 from src.ingest_data import load_data_first
-from src.clean import clean_table
+from src.clean import clean_table_local
 from src.model_final import fitting
 from src.evaluation import eval 
 
@@ -45,14 +45,13 @@ if __name__ == '__main__':
                              help="Database in RDS")
     sub_process.set_defaults(func=create_rds_db)
 
-    parser = argparse.ArgumentParser(description="Run components of the model source code")
-    subparsers = parser.add_subparsers()
-
     sub_process = subparsers.add_parser('ingest_data') 
     sub_process.set_defaults(func=load_data_first)
 
     sub_process = subparsers.add_parser('Returns_cleaned_data')
-    sub_process.set_defaults(func=clean_table)
+    sub_process.add_argument("--where", type=str, default="Local", help="'Local' or 'AWS'; The destination bucket name needs to be provided in case of AWS")
+    sub_process.add_argument("--bucket", default="None", help="Destination S3 bucket name")
+    sub_process.set_defaults(func=clean_table_local)
 
     sub_process = subparsers.add_parser('Model_fitting')
     sub_process.set_defaults(func=fitting)
@@ -61,7 +60,7 @@ if __name__ == '__main__':
     sub_process.set_defaults(func=eval)
     
     args = parser.parse_args()
-    args.func()
+    args.func(args)
 
 
 

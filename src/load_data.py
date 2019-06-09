@@ -22,20 +22,26 @@ def run_loading_local():
     '''
     logger.debug('Running the run_loading_local function')
     s3 = boto3.client('s3')
+
     for object in s3.list_objects_v2(Bucket=config.SOURCE_BUCKET)['Contents']:
         try: 
+            print(os.path.join("./data", "raw", object['Key']))
+            print(config.SOURCE_BUCKET)
+            print(object['Key'])
             logger.info("Downloading %s from bucket %s", object['Key'], config.SOURCE_BUCKET)
             s3.download_file(config.SOURCE_BUCKET, object['Key'], os.path.join("data", "raw", object['Key']))
             logger.info("File successfully downloaded to %s", os.path.join("data", "raw"))
 
         except ClientError as e:
             if e.response['Error']['Code'] == "404":
-                logger.warning("The object %s does not exist in AWS bucket %s.", object['Key'], config.SOURCE_BUCKET)
+                print("fuck")
+                logger.warning("The object %s does not exist in AWS bucket %s.", object['Key'], config['load_data']['SOURCE_BUCKET'])
             else:
                 raise
         
         except Exception as e:
             logger.error(e)
+            return
 
 def run_loading_AWS(bucket_name):
     '''Fetches the data from the raw source and dumps it on the AWS s3 bucket provided
