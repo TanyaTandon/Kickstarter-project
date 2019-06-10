@@ -80,7 +80,7 @@ def add_entry():
         Date_Ended = request.form['date_ended']
         Goal = request.form['goal']
         print(Goal)
-        print("FUCK YEA")
+       
         #logger.info("Successfully retrieved all inputs ")
 
         # load trained model

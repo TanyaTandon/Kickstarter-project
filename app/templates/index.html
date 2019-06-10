@@ -330,21 +330,24 @@ Dear Genie
                 </p>
                 <p>
                 <label> End Date
-                <input type="date" name="date_ended" required>
+                <input type="date" name="date_ended" min = "date_started" required>
                 </label>
                 </p>
              
                 
                 <p>
-                <label>Goal
-                <input type="Integer" name="goal" required >
+
+             
+                <label>Goal Amount
+                <input type="Number" min="1" max="100000000000" name="goal" required >
+            
                 </label>
                 
                 </p>
                 
                 
                 
-                <p> <input type = submit value = 'Predict the future' class = "button">
+                <p> <input type=submit value = 'Predict the future' class = "button">
                      </p>
                 </dl>
             </form>
