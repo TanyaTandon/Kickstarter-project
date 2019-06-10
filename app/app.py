@@ -134,9 +134,16 @@ def add_entry():
                 if( j == i[9:]):
                     test_f.loc[0, i] = 1
         test_f = test_f.fillna(0)
-
-        # make a prediction
-        print(test_f) 
+        print(test_f.to_string())
+        Currency_load = pd.read_csv("data/raw/Currency_Exchange.csv" )
+        exchange = Currency_load[Currency_load['Currency'].str.contains(Currency)].iloc[0]['Conversion']
+        print(exchange)
+        print(Currency)
+        test_f.goal = test_f.goal.astype(float)
+        print (test_f.dtypes)
+        test_f['usd_goal_real'] = test_f[ "goal"].apply(lambda x: x*exchange)
+        
+        
         prob = model.predict_proba(test_f)[:,1]
         print(prob)
         #logger.info("prediction made: {:0.3f}".format(prob))
