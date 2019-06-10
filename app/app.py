@@ -9,9 +9,10 @@ import logging.config
 from flask import Flask
 import sys
 sys.path.insert(0, '../src')
-from model import Userinput
+from src.model import Userinput
 sys.path.insert(0, '../app')
 from flask_sqlalchemy import SQLAlchemy
+import yaml
 
 
 # Initialize the Flask application
@@ -31,16 +32,33 @@ db = SQLAlchemy(app)
 
 
 @app.route('/')
-def index():
+def homepage():
     """Homepage of this prediction system.
     
     Returns: rendered html template
     """
 
     try:
-        return render_template('index.html')
+        return render_template('homepage.html')
     except:
         logger.warning("Not able to display homepage, error page returned")
+        return render_template('error.html')
+
+@app.route('/index', methods=['POST','GET'])
+def index():
+    """Main view that get customer information for evaluation.
+    
+    Create view into evaluation page that allows to input information and predict price
+    
+    Returns: rendered html template
+    """
+    
+    #ogger.debug('index called.')
+    #Trying to load the index page
+    try:
+       return render_template('index.html')
+    except Exception as e:
+        #logger.error(e)
         return render_template('error.html')
 
 
@@ -62,7 +80,6 @@ def add_entry():
         Date_Ended = request.form['date_ended']
         Goal = request.form['goal']
         print(Goal)
-        print("FUCK YEA")
         #logger.info("Successfully retrieved all inputs ")
 
         # load trained model
@@ -150,7 +167,16 @@ def add_entry():
         #logger.warning("Not able to display evaluations, error page returned")
         return render_template('error.html')
 
-
-if __name__ == "__main__":
+def run_app(args):
+    '''Runs the app
+    
+    Args:
+        args: Argparse args - includes args.where, args.manual
+        
+    Returns:
+        None
+    '''
+    #logger.debug('Running the run_app function')
+   
     app.run(debug=app.config["DEBUG"], port=app.config["PORT"], host=app.config["HOST"])
 

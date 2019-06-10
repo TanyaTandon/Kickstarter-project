@@ -16,7 +16,7 @@ logger = logging.getLogger(__name__)
 
 
 
-def clean_table_local(): 
+def clean_table_local(config): 
 
 	#Changed the coloumns in datetime format 
 	df = pd.read_csv("./data/raw/ks-projects-201801.csv")
@@ -55,16 +55,18 @@ def clean_table_local():
 	df.rename(columns={"main_category_Film & Video": "main_category_Film"}, inplace=True)
 	df.to_csv("./data/clean/cleaned_data.csv", index = False, header= True) 
 
-def clean_table_AWS(): 
+def clean_table_AWS(config, bucket_name): 
 	
 	logger.debug("Loading the raw file.")
 	
 	try:    
 		client = boto3.client('s3')
 		resource = boto3.resource('s3')
-		obj = client.get_object(Bucket=bucket_name, Key=config['load_data']['save_location'] + "/" + config['clean_data']['input_file_name'])
+		obj = client.get_object(Bucket=bucket_name, Key=config['load_data']['save_location'] + "/" + config['clean']['input_file_name'])
 		my_bucket = resource.Bucket(bucket_name)
+
 		df = pd.read_csv(obj['Body'])
+
 	
 	except Exception as e:
 		logger.error(e)
@@ -73,7 +75,7 @@ def clean_table_AWS():
 #Cleaning the data
 	logger.debug("Raw file successfully loaded. Starting cleaning process.")
 	try:
-	
+
 		df["launched"] = pd.to_datetime( df['launched'] )
 		df["deadline"] = pd.to_datetime( df['deadline'] )
 
@@ -109,7 +111,7 @@ def clean_table_AWS():
 		df.rename(columns={"main_category_Film & Video": "main_category_Film"}, inplace=True)
 		
 		df.to_csv(os.path.join(config['clean']['save_location'], config['clean']['output_file_name']))
-		my_bucket.upload_file(os.path.join(config['clean']['save_location'], config['clean']['output_file_name']),Key=config['clean']['save_location'] + "/" + config['clean_data']['output_file_name'])
+		my_bucket.upload_file(os.path.join(config['clean']['save_location'], config['clean']['output_file_name']),Key=config['clean']['save_location'] + "/" + config['clean']['output_file_name'])
 		os.remove(os.path.join(config['clean']['save_location'], config['clean']['output_file_name']))
 	
 
@@ -137,7 +139,7 @@ def clean_loading(args):
 		clean_table_local(config)
 	
 	elif args.where == "AWS":
-		clean_table__AWS(config, args.bucket)
+		clean_table_AWS(config, args.bucket)
 			
 	else:
 			logger.error('Kindly check the arguments and rerun. To understand different arguments, run `python run.py --help`')

@@ -1,21 +1,18 @@
-#passing variables to functions for each file?
-# can this all read from 1 file? or break up the files?
-
-#s3 files, make file is not in prod
-
 load_data:
- ingest:
- 	source_data_url: https://archive.ics.uci.edu/ml/machine-learning-databases/undocumented/taylor/cloud.data
-	sed_start_index: 21
-	sed_end_index: 50p
-	name: clouds.data
-	path: ./data
+  duration_delete_value: 100
+  save_location: 'data/raw'
 
 clean:
-	save_location: 'data/clean'
-	output_file_name: 'train_cleaned.csv'
+  input_file_name: 'ks-projects-201801.csv'
+  save_location: 'data/clean'
+  output_file_name: 'train_cleaned.csv'
 
 save_location: 'data/raw'
+
+db_config:
+  SQLALCHEMY_DATABASE_URI: 'sqlite:///database/msia423.db'
+  SQLALCHEMY_TRACK_MODIFICATIONS: True
+  SQLALCHEMY_ECHO: False  # If true, SQL for queries made will be printed
 
 delete_columns:
 - 'ID'
@@ -26,20 +23,23 @@ delete_columns:
 - 'name'
 - 'backers'
 - 'pledged'
-			
-train_model:	
-	start: 
-		seed: 42
-		split: 0.1  
-		params: 
-			n_estimators: 150
-			max_depth: 3
-			learning_rate: 0.2
-			min_samples_leaf: 1
-			random_state: 3 
+      
+train_model:  
+  start: 
+    seed: 42
+    split: 0.1  
+    params: 
+      n_estimators: 150
+      max_depth: 3
+      learning_rate: 0.2
+      min_samples_leaf: 1
+      random_state: 3
+  save_location: 'models' 
+  model: 'GradientBoosting'
+  version: 'v1'  
 
 
-	path: ./eval
-	file_name: 'evaluation.txt'
-	save_location: './models/'
-	f_name: 'GradientBoosting.pkl'
+  path: ./eval
+  file_name: 'evaluation.txt'
+  f_name: 'GradientBoosting.pkl'
+

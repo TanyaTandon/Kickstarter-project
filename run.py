@@ -17,47 +17,53 @@ logging.config.fileConfig(os.path.join("config","logging_local.conf"))
 logger = logging.getLogger(config.LOGGER_NAME)
 
 from src.load_data import run_loading
-from src.model import create_sqlite_db, create_rds_db
+from src.model import create_db
 from config.config import SQLALCHEMY_DATABASE_URI, DATABASE_NAME
 
-from src.ingest_data import load_data_first
-from src.clean import clean_table_local
-from src.model_final import fitting
+from src.clean import clean_loading
+from src.model_train import train_model
 from src.evaluation import eval 
+from app.app import run_app
 
 if __name__ == '__main__':
 
     parser = argparse.ArgumentParser(description="Data processes")
     subparsers = parser.add_subparsers()
 
+    #Sub parser for loading the data
     sub_process = subparsers.add_parser('loadS3')
     sub_process.add_argument("--where", type=str, default="Local", help="'Local' or 'AWS'; The destination bucket name needs to be provided in case of AWS")
     sub_process.add_argument("--bucket", default="None", help="Destination S3 bucket name")
     sub_process.set_defaults(func= run_loading)
 
-    sub_process = subparsers.add_parser('createSqlite')
-    sub_process.add_argument("--engine_string", type=str, default=SQLALCHEMY_DATABASE_URI,
-                             help="Connection uri for SQLALCHEMY")
-    sub_process.set_defaults(func=create_sqlite_db)
-
-    sub_process = subparsers.add_parser('createRDS')
-    sub_process.add_argument("--database", type=str, default=DATABASE_NAME,
-                             help="Database in RDS")
-    sub_process.set_defaults(func=create_rds_db)
-
-    sub_process = subparsers.add_parser('ingest_data') 
-    sub_process.set_defaults(func=load_data_first)
-
+    #Sub parser for cleaning the data
     sub_process = subparsers.add_parser('Returns_cleaned_data')
     sub_process.add_argument("--where", type=str, default="Local", help="'Local' or 'AWS'; The destination bucket name needs to be provided in case of AWS")
     sub_process.add_argument("--bucket", default="None", help="Destination S3 bucket name")
-    sub_process.set_defaults(func=clean_table_local)
+    sub_process.set_defaults(func=clean_loading)
 
-    sub_process = subparsers.add_parser('Model_fitting')
-    sub_process.set_defaults(func=fitting)
+    # Sub parser for creating database 
+    sb_create = subparsers.add_parser("create_db", description="Create database to track usage logs")
+    sb_create.add_argument("--where", default="Local", help="'Local' or 'AWS'")
+    sb_create.add_argument("--manual", default="no", help="Set as 'yes' if manually inputing RDS db credentials. Seeks variables from environment by default")
+    sb_create.set_defaults(func=create_db)
 
-    sub_process = subparsers.add_parser('eval')
-    sub_process.set_defaults(func=eval)
+
+    # Sub-parser for training the model
+    sb_train_model = subparsers.add_parser("Model_fitting", description="Trains the model")
+    sb_train_model.add_argument("--where", default="Local", help="'Local' or 'AWS'; The destination bucket name needs to be provided in case of AWS")
+    sb_train_model.add_argument("--bucket", default="None", help="Destination S3 bucket name")
+    sb_train_model.set_defaults(func=train_model)
+
+    # sub_process = subparsers.add_parser('eval')
+    # sub_process.set_defaults(func=eval)
+
+    # Sub-parser for starting the app
+    sb_run_app = subparsers.add_parser("run_app", description="Runs the app")
+    sb_run_app.add_argument("--where", default="Local", help="'Local' or 'AWS'; The S3 bucket name needs to be provided in case of AWS")
+    sb_run_app.add_argument("--bucket", default="None", help="S3 bucket name from where to source the model")
+    sb_run_app.set_defaults(func=run_app)
+
     
     args = parser.parse_args()
     args.func(args)
