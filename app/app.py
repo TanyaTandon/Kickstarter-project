@@ -80,6 +80,7 @@ def add_entry():
         Date_Ended = request.form['date_ended']
         Goal = request.form['goal']
         print(Goal)
+        print("FUCK YEA")
         #logger.info("Successfully retrieved all inputs ")
 
         # load trained model
@@ -142,12 +143,16 @@ def add_entry():
 
         if prob >= 0.8:
             evaluation = "You are getting the money!!! Hype up and start sprinting work on your dream project. "
+            giphy= "https://giphy.com/embed/xT8qBfxbxaS8DRPnUY" 
         elif prob >= 0.5 and prob < 0.8:
             evaluation = "It's possible your campaign is a hit. But I am not sure  "
+            giphy= "https://giphy.com/embed/DfdbTJZx6Yjra"
         elif prob >= 0.2 and prob < 0.5:
             evaluation = "Pretty difficult"
+            giphy="https://giphy.com/embed/26tPlltsuA89RwYww" 
         else:
             evaluation = "bad news"
+            giphy = "https://giphy.com/embed/xT3i1guCHAImD167yE"
         print(evaluation)
 
         # customer1 = Userinput(Name=String(Name), activeMember=float(Date_Ended), numProducts=float(Category),
@@ -159,9 +164,11 @@ def add_entry():
         #logger.info("New customer evaluated as: %s", evaluation)
         
         #result = "This customer will churn with probability {:0.3f} - classified as {}".format(prob, evaluation)
-        result = prob
+        result = (prob * 100)[0,]
+        result = str(round(result, 2))
+        result = result + "" + "%"
         #return redirect(url_for('index'))
-        return render_template('index.html', result=result)
+        return render_template('prediction.html', result=result,evaluation = evaluation,giphy =giphy  ) 
     except:
         traceback.print_exc()
         #logger.warning("Not able to display evaluations, error page returned")
@@ -177,6 +184,4 @@ def run_app(args):
         None
     '''
     #logger.debug('Running the run_app function')
-   
     app.run(debug=app.config["DEBUG"], port=app.config["PORT"], host=app.config["HOST"])
-

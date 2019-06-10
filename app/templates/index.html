@@ -6,7 +6,47 @@
 </script>
 <title>
 Dear Genie
-</title><script>
+</title>
+<style>
+        .myForm
+        {  
+         margin-top: 50px;
+        background-color: #ffffff;
+        margin-left: 250px; 
+
+        background-size: cover;
+        font-size: 13pt;
+  
+        }
+
+        .heading
+{
+    color: #ffffff ;
+    margin-top: 0px;
+    background-color: #00BA6F;
+    font-size: 20pt;
+}     
+
+.button   {
+  display: inline-block;
+  color: #ffffff ;
+  border: 1.5px solid #ffffff;
+  border-radius: 1.5px;
+  padding: 25px 30px;
+  margin-left: 0px;
+  background-color:#00BA6F;
+  margin-right: 20px;
+  text-decoration: none;
+  font-size: 17px;
+}
+
+.giphy2
+{
+    margin-left: 120px;
+
+}
+        </style>
+<script>
     window.honeybadgerConfiguration = {
     apiKey : "3ed52f9b",
     environment : "production",
@@ -16,43 +56,27 @@ Dear Genie
     onerror : false,
   };
   
+
+  <link rel="stylesheet" href="static/css/style.css">
  
 </script>
    </title>
+        <div class = "heading">
+        <center>
+        <br> </br>
+        <h2> What is the future of my Kickstarter campaign? &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </h2>
+    </center>
+    </div>
+    <div class = "giphy2">
+        <iframe src="https://giphy.com/embed/12Eo7WogCAoj84" width="500" height="170" frameBorder="0" class="giphy-embed" allowFullScreen></iframe><p></p>
+</div>
 
-    <!-- attach our stylesheet -->
-    <link rel="stylesheet" href="static/css/style.css">
-</head>
-<body>
-
-    <!-- the header -->
-    <header>
-
-
-    </header>
-
-    <!-- the content -->
-    <main>
-
-        <!-- hero content -->
-
-       
-            <!-- content for the hero -->
-            
-        <!-- features section -->
-        <div class="site-section">
-        <div class="site-section-inside">
-
-            <div class="section-header">
-                <h2> What is the future of my Kickstarter campaign? </h2>
-            </div>
-
-            <form class="myForm" enctype="application/x-www-form-urlencoded" action="{{ url_for('add_entry') }}" method=post class=add-entry>
+            <form class="myForm" enctype="application/x-www-form-urlencoded" action="{{ url_for('add_entry') }}" method=post >
         
                         <dl>
                 <p>
                 <label> Campaign Name
-                <input type="text" name="name" required , input size="50">
+                <input type="text" name="name" required >
                 
                 </label> 
                 </p>
@@ -62,7 +86,7 @@ Dear Genie
                         <label> Main Category  
                             
                         <select id="main_category" name="main_category">
-                        <option value="" selected="selected", input size="50">Select One</option>
+                        <option value="" selected="selected">Select One</option>
                         <option value="Art"  >Art</option>
                         <option value="Comics" >Comics</option>
                         <option value="Crafts" >Crafts</option>
@@ -320,51 +344,15 @@ Dear Genie
                 
                 
                 
-                <p><button> <input type=submit value = 'Predict the future'>
-                     </button></p>
+                <p> <input type = submit value = 'Predict the future' class = "button">
+                     </p>
                 </dl>
             </form>
+          
+
 
         
-          
-        </div>
-
-        <div class="col-md-4">
-                <h2>
-                    Prediction
-                </h2>
-                
-                <p>
-                    <a class="btn" href="#">View details »</a>
-                </p>
-                <h3>
-                    {{result}}
-                </h3>
-            </div>
-
-        <!-- testimonials section -->
-        <div class="site-section site-section-secondary">
-        <div class="site-section-inside">
-
-            <div class="section-header">
-                <h2>Learn about best Month, duration, Name statistics</h2>
-            </div>
-
-            
-               
-            </div>
-
-        </div>
-        </div>
-
     </main>
-
-    <!-- the footer -->
-    <footer>
-         <iframe src="https://giphy.com/embed/BYaQgGmxF4bgA" width="480" height="287" frameBorder="0" allowFullScreen></iframe><p></a></p>
-         <!–– <img src="img/tanya.jpg" alt="Footer Logo"> 
-        <span>Tanya Tandon<br>Copyright &copy; 06/05/2019 </span>
-    </footer>
 
 </body>
 </html>

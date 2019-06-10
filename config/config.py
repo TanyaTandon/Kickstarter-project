@@ -13,4 +13,4 @@ HOST = "127.0.0.1"
 #Logging
 LOGGER_NAME = 'root'
 
-PATH_TO_MODEL = "../models/GradientBoosting.pkl"
+PATH_TO_MODEL = "models/GradientBoosting.pkl"
