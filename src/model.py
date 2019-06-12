@@ -33,17 +33,21 @@ class Userinput(Base):
     __tablename__ = 'Userinput'
 
     id = Column(Integer, autoincrement=True, primary_key=True)
-    camp_name = Column(String(300), unique=False, nullable=False)
-    category = Column(String(100), unique=False, nullable=False)
-    launch_day = Column(String(100), unique=False, nullable=False)
-    deadline_day = Column(String(100), unique=False, nullable=False)
-    goal = Column(Integer, unique=False, nullable=False)
-    country = Column(String(100), unique=False, nullable=False)
+    timestamp = Column(String(100), unique=False, nullable=False)
+    Name = Column(String(300), unique=False, nullable=False)
+    Main_Category= Column(String(100), unique=False, nullable=False)
+    Category = Column(String(100), unique=False, nullable=False)
+    Currency = Column(String(100), unique=False, nullable=False)
+    Country = Column(String(100), unique=False, nullable=False)
+    Date_Started = Column(String(100), unique=False, nullable=False)
+    Date_Ended = Column(String(100), unique=False, nullable=False)
+    Goal = Column(Integer, unique=False, nullable=False)
+   
     
 
     def __repr__(self):
-        Userinput_repr = "<Userinput(id ='%i', camp_name='%s', category='%s', launch_day='%s', deadline_day= '%s', goal= '%i', country= '%s')>"
-        return Userinput_repr % (self.id, self.camp_name, self.category, self.launch_day, self.deadline_day, self.goal, self.country)
+        Userinput_repr = "<Userinput(id ='%i', timestamp = '%s', Name='%s', Main_Category='%s',Category='%s', Currency= '%s', Country= '%s', Date_Started='%s', Date_Ended= '%s', Goal= '%i')>"
+        return Userinput_repr % (self.id, self.timestamp, self.Name, self.Main_Category, self.Category, self.Currency , self.Country, self.Date_Started, self.Date_Ended, self.Goal)
 
 
 def create_db(args):

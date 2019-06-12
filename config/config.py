@@ -1,14 +1,28 @@
 
+import os 
+MODE='AWS'
 LOGGING_CONFIG = "logging/local.conf"
 DEBUG = True
-SOURCE_BUCKET = 'bossbucket'
+SOURCE_BUCKET = 'branchprivatebucket'
 
 PORT = 9033
 APP_NAME = "dear-genie"
-SQLALCHEMY_DATABASE_URI = 'sqlite:///data/msia423.db'
+
 SQLALCHEMY_TRACK_MODIFICATIONS = True
-DATABASE_NAME = 'msia423'
 HOST = "127.0.0.1"
+
+conn_type = "mysql+pymysql"
+user = os.environ.get("MYSQL_USER")
+password = os.environ.get("MYSQL_PASSWORD")
+host = os.environ.get("MYSQL_HOST")
+port = os.environ.get("MYSQL_PORT")
+DATABASE_NAME = 'msia423'
+if MODE == 'AWS':
+    SQLALCHEMY_DATABASE_URI = "{}://{}:{}@{}:{}/{}".\
+    format(conn_type, user, password, host, port, DATABASE_NAME)
+else:
+    SQLALCHEMY_DATABASE_URI = 'sqlite:///../database/msia423.db'
+
 
 #Logging
 LOGGER_NAME = 'root'

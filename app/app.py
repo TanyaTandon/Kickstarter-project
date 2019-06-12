@@ -13,6 +13,7 @@ from src.model import Userinput
 sys.path.insert(0, '../app')
 from flask_sqlalchemy import SQLAlchemy
 import yaml
+import datetime
 
 
 # Initialize the Flask application
@@ -79,7 +80,6 @@ def add_entry():
         Date_Started = request.form['date_started']
         Date_Ended = request.form['date_ended']
         Goal = request.form['goal']
-        print(Goal)
        
         #logger.info("Successfully retrieved all inputs ")
 
@@ -137,10 +137,7 @@ def add_entry():
         print(test_f.to_string())
         Currency_load = pd.read_csv("data/raw/Currency_Exchange.csv" )
         exchange = Currency_load[Currency_load['Currency'].str.contains(Currency)].iloc[0]['Conversion']
-        print(exchange)
-        print(Currency)
-        test_f.goal = test_f.goal.astype(float)
-        print (test_f.dtypes)
+        test_f.goal = test_f.goal.astype(float) 
         test_f['usd_goal_real'] = test_f[ "goal"].apply(lambda x: x*exchange)
         
         
@@ -158,28 +155,40 @@ def add_entry():
             evaluation = "Pretty difficult"
             giphy="https://giphy.com/embed/26tPlltsuA89RwYww" 
         else:
-            evaluation = "bad news"
+            evaluation = "Bad news"
             giphy = "https://giphy.com/embed/xT3i1guCHAImD167yE"
-        print(evaluation)
-
-        # customer1 = Userinput(Name=String(Name), activeMember=float(Date_Ended), numProducts=float(Category),
-        #     fromGermany=float(Germany), gender=float(Male), Main_Category=float(Main_Category), Date_Started=float(Date_Started),
-        #     Country=float(Country), predicted_score=float(prob))
-        # db.session.add(customer1)
-        # db.session.commit()
-
-        #logger.info("New customer evaluated as: %s", evaluation)
         
-        #result = "This customer will churn with probability {:0.3f} - classified as {}".format(prob, evaluation)
         result = (prob * 100)[0,]
         result = str(round(result, 2))
         result = result + "" + "%"
-        #return redirect(url_for('index'))
+
+
+        new_entry = Userinput(
+                    timestamp = str(datetime.datetime.now()),
+                    Name = Name, 
+                    Main_Category = Main_Category,
+                    Category = Category, 
+                    Currency = Currency, 
+                    Country = Country, 
+                    Date_Started = Date_Started, 
+                    Date_Ended = Date_Ended,
+                    Goal= Goal
+                )
+
+        db.session.add(new_entry)
+        db.session.commit()
+
+
         return render_template('prediction.html', result=result,evaluation = evaluation,giphy =giphy  ) 
     except:
         traceback.print_exc()
         #logger.warning("Not able to display evaluations, error page returned")
         return render_template('error.html')
+
+        #if(app.config['MODE']=="AWS"):
+            #logger.debug("Adding new record to database in RDS.")
+        #else:
+            #logger.debug("Adding new record to the local database.")
 
 def run_app(args):
     '''Runs the app

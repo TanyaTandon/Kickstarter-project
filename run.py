@@ -55,9 +55,6 @@ if __name__ == '__main__':
     sb_train_model.add_argument("--bucket", default="None", help="Destination S3 bucket name")
     sb_train_model.set_defaults(func=train_model)
 
-    # sub_process = subparsers.add_parser('eval')
-    # sub_process.set_defaults(func=eval)
-
     # Sub-parser for starting the app
     sb_run_app = subparsers.add_parser("run_app", description="Runs the app")
     sb_run_app.add_argument("--where", default="Local", help="'Local' or 'AWS'; The S3 bucket name needs to be provided in case of AWS")
