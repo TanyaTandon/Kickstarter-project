@@ -75,15 +75,15 @@ QA Owner: Saurabh Annadate
 
 5.  **Theme1.epic2.story2**  (2pts) - (completed)
     
-6.  **Theme1.epic3.story1**  (2pts) - 
+6.  **Theme1.epic3.story1**  (2pts) - (completed)
     
-7.  **Theme1.epic3.story2**  (2pts) - 
+7.  **Theme1.epic3.story2**  (2pts) - (completed)
     
-8.  **Theme1.epic3.story3**  (2pts) - 
+8.  **Theme1.epic3.story3**  (2pts) - (completed)
     
-9.  **Theme1.epic3.story4**  (1pts) - 
+9.  **Theme1.epic3.story4**  (1pts) - (completed)
     
-10.  **Theme1.epic3.story5**  (2pts) 
+10.  **Theme1.epic3.story5**  (2pts) - (completed)
     
 11.  **Theme1.epic4**  (3pts)
     
@@ -93,19 +93,19 @@ QA Owner: Saurabh Annadate
     
 14.  **Theme2.epic1.story3**  (1pts) (completed)
  
-15.  **Theme2.epic1.story4**  (1pts)
+15.  **Theme2.epic1.story4**  (1pts) (completed)
 
-16.  **Theme2.epic1.story5**  (1pts)
+16.  **Theme2.epic1.story5**  (1pts) (completed)
 
-17.  **Theme2.epic2.story1**  (3pts)
+17.  **Theme2.epic2.story1**  (3pts) (completed)
     
-18.  **Theme2.epic2.story2**  (4pts)
+18.  **Theme2.epic2.story2**  (4pts) (completed)
 
-19.  **Theme2.epic3.story1**  (1pts)
+19.  **Theme2.epic3.story1**  (1pts) (completed)
 
-20.  **Theme2.epic3.story2**  (1pts)
+20.  **Theme2.epic3.story2**  (1pts) (completed)
     
-21.  **Theme2.epic4.story1**  (2pts)
+21.  **Theme2.epic4.story1**  (2pts) (completed)
     
 22.  **Theme2.epic4**  (2pts)
     
@@ -113,7 +113,7 @@ QA Owner: Saurabh Annadate
 
 # Icebox 
 
-***Epic 1 :*** Develop a recommendation bar to suggest alternate goals and alternate completion dates for success of the projects 
+***Epic 1 :*** Develop a recommendation bar to suggest alternate goals and alternate completion dates for success of the projects  
 - **Story 1:** Integrate the model with this functionality 
 - **Story 2:** Integrate the UI with this functionality 
 
