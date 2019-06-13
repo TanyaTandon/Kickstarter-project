@@ -171,71 +171,222 @@ QA Owner: Saurabh Annadate
 ├── requirements.txt                  <- Python package dependencies 
 ```
 
-## Instructions to run the application
+# Instructions to run the application
 
 Ths application can be run on both local system as well as on AWS. Steps on how to deploy the app for both settings is given below.
 
-### 1. Set up environment 
+## 1. Setting up AWS
+Either you run on `AWS` or `Local`, you need to set up your aws account. There are two ways to do it. 
+#### 1.1. Download .pem file from AWS 
+You can check if you own it by going to your terminal and typing `cd ~/.aws` . If it exists, then you are good otherwise, follow 1.2. 
+#### 1.2. Set up configure using terminal 
+```bash
+pip install awscli
+aws configure
+```
+Input values in `AWS Access key ID` and `AWS Secret Access Key`. 
+Press enter on region and output format. 
 
-The `requirements.txt` file contains the packages required to run the model code. An environment can be set up in two ways. 
+## 2. Specify in configure file(s) if the app will be run locally or on AWS
+
+#### 2.1. Running on a local machine
+
+ **config/config.py**
+* Make sure that the `WHERE` variable is set to `Local`
+* Ensure that the `HOST` variable is set to  `127.0.0.1`
+* Keep the default `PORT` of `3000` ; However, change it if this port is not available
+
+**Makefile**
+* Ensure that the `WHERE` variable is set to `Local`
+* Ensure that the variable `BUCKET` is set to `Scipts` if running on Windows, else `bin` if on Linux or MacOS
+
+#### 2.2. Running on AWS
+
+**RDS configurations**
+In order to use RDS, the RDS credentials need to be added to the os environment. Add the following variables to the environment:
+* `MYSQL_USER `: *Username to access the RDS instance*
+* `MYSQL_PASSWORD` : *Password to access the RDS instance*
+* `MYSQL_HOST` : *RDS instance endpoinr*
+* `MYSQL_PORT` : *Port number to access the instance*
+* `MYSQL_DB` : *Name of the database*
+
+**Makefile**
+* Make sure that the `WHERE` variable is set to `AWS`
+* Set the variable `YOUR_S3_BUCKET` to the S3 bucket that you intend to use
+* Make sure that the variable `BUCKET` is set to `AWS` if running on Windows server, else "bin" if on Linux server
+
+## 3. Run all the functions in one step
+
+In command line, type 
+`make all`
+
+## 4. Run each function seperately
+
+### 4.1. Set up environment
 
 #### With `virtualenv`
 
 ```bash
 pip install virtualenv
 
-virtualenv deargenie
+virtualenv Kickstarter
 
-source deargenie/bin/activate
+source Kickstarter/bin/activate
 
 pip install -r requirements.txt
 
 ```
+#### With `conda`
 
-### 2. Download the data
+```bash
+conda create -n Kickstarter python=3.7.3
+conda activate Kickstarter
+pip install -r requirements.txt
 
-Kaggle Link: https://www.kaggle.com/kemical/kickstarter-projects
+```
 
-#### Local
+#### With `Make`
+
+```bash
+make venv
+```
+
+
+### 4.2. Download the data
+
+Original source: [https://www.kaggle.com/kemical/kickstarter-projects](https://www.kaggle.com/kemical/kickstarter-projects)
+The data has also been loaded on a public AWS bucket called: `bossbucket`
+
+### Local
+#### Local: Using run file
 Run the following command in bash:
 ```bash
 python run.py loadS3
 ```
 Running this code will download the raw data from the s3 bucket and will put it in **/Data/raw/**
 
+#### Local: With `Make`
+```
+make load_data
+```
+
 
 #### AWS
+####  AWS: Using run file
 Run the following command in bash:
 ```bash
 python run.py loadS3 --where=AWS --bucket=<destination_bucket_name>
 ```
 Running this code will download the raw data from the s3 bucket and will put it in **<destination_bucket_name>/raw/**
-
-### 3. Initialize the database
+#### AWS: With `Make`
+```
+make load_data
+```
+### 4.3. Initialize the database
 
 #### Local
 Run the following command in bash:
 ```bash
-python run.py createSqlite
+python run.py create_db
 ```
-Running this code will create a sqlite database to log the app usage at: **/Data/usage_log/msia423.db**
+Running this code will create a sqlite database to log the app usage at: **/Database/msia423.db**
+The table name is `Userinput`
 
+With `Make`
+```
+make create_db
+```
 
 #### AWS
 
-There are two ways that a database can be initialized in AWS.
-
-##### - Take configurations from the environment:
-
-This requires the following environment variables to be set in advance of running the code:
-* MYSQL_USER : *Username to access the RDS instance*
-* MYSQL_PASSWORD : *Password to access the RDS instance*
-* MYSQL_HOST : *RDS instance endpoinr*
-* MYSQL_PORT : *Port number to access the instance*
-*
-After the environment variables have been set, run the following command in bash:
+Make sure the environment varia
+Run the following command in command line:
 ```bash
-python run.py createRDS --database=<database name> 
+python run.py create_db --where=AWS
 ```
-Running this code will create the database specified in the given RDS instance. By default, database name = msia423 
+
+With `Make`
+```
+make create_db
+```
+
+Running this code will create the database specified in the given RDS instance 
+
+### 4.4. Clean the data
+
+#### Local
+Run the following command in command line:
+```bash
+python run.py clean_data
+```
+
+With `Make`
+```
+make clean_data
+```
+Running this code will clean the raw data and create a cleaned dataset at: **/Data/clean/**
+
+#### AWS
+Run the following command in command line:
+```bash
+python run.py clean_data --where=AWS --bucket=<destination_bucket_name>
+```
+
+With `Make`
+```
+make clean_data
+```
+Running this code will clean the raw data from the S3 bucket and will put it in **<destination_bucket_name>/clean/**
+
+### 4.5. Train Model
+
+#### Local
+Run the following command in command line:
+```bash
+python run.py Model_fitting
+``` 
+
+With `Make`
+```
+make train_model
+```
+Running this code will train the prediction model and will dump it at: **/models/**
+
+#### AWS
+Run the following command in command line:
+```bash
+python run.py Model_fitting --where=AWS --bucket=<destination_bucket_name>
+```
+
+With `Make`
+```
+make train_model
+```
+Running this code will clean the raw data from the S3 bucket and will put it in **<destination_bucket_name>/models/**
+
+### 4.6. Launch app
+
+#### Local or AWS
+Run the following command in command line:
+```bash
+python run.py run_app
+``` 
+
+With `Make`
+```
+make app
+```
+Running this code will start the flask app at the IP specified in **config/config.py**
+
+## Testing
+
+In order to unit test the functions, follow the following steps:
+1. Navigate to the tests folder
+2. Run the following command on the command line:
+```
+pytest test_all_functions.py
+```
+
+## Logging
+All logs are saved at **logs/logfile.log**
 
